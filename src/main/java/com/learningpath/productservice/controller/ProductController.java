@@ -1,9 +1,9 @@
 package com.learningpath.productservice.controller;
 
-import com.learningpath.productservice.CouponService;
 import com.learningpath.productservice.dto.Coupon;
 import com.learningpath.productservice.model.Product;
 import com.learningpath.productservice.repos.ProductRepository;
+import com.learningpath.productservice.service.CouponApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private CouponService couponService;
+    private CouponApiService couponApiService;
 
 
     @GetMapping("/index")
@@ -47,7 +47,7 @@ public class ProductController {
     public ModelAndView addProduct(Product product)
     {
         if(product.getDiscountCode()!=null && product.getDiscountCode().length()>0 ) {
-             Coupon coupon = couponService.getCoupon(product.getDiscountCode());
+             Coupon coupon = couponApiService.getCoupon(product.getDiscountCode());
             if(coupon!=null && coupon.getDiscount()!=null)
                 product.setPrice(product.getPrice().subtract(BigDecimal.valueOf(coupon.getDiscount())));
             else

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class CouponService {
+public class CouponApiService {
 
     @Value("${coupons-service.url}")
     private String couponServiceURL;
